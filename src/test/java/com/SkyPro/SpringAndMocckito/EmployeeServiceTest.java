@@ -50,8 +50,9 @@ public class EmployeeServiceTest {
         assertThatExceptionOfType(EmployeeStorageIsFullException.class)
                 .isThrownBy(() -> employeeService.addEmployee(name, surname, departament, salary));
     }
+
     @Test
-    public void addNegativeTest3(){
+    public void addNegativeTest3() {
         assertThatExceptionOfType(IncorrectNameException.class)
                 .isThrownBy(() -> employeeService.addEmployee("Иван", "Ivanoв", 1, 56000));
 
@@ -61,14 +62,15 @@ public class EmployeeServiceTest {
         assertThatExceptionOfType(IncorrectNameException.class)
                 .isThrownBy(() -> employeeService.addEmployee(null, "Иванова", 2, 75000));
     }
+
     @ParameterizedTest
     @MethodSource("params")
     public void removeNegativeTest(String name,
-                                 String surname,
-                                 int departament,
-                                 double salary){
+                                   String surname,
+                                   int departament,
+                                   double salary) {
         assertThatExceptionOfType(EmployeeNotFoundException.class)
-                .isThrownBy(()->employeeService.removeEmployee("test","test"));
+                .isThrownBy(() -> employeeService.removeEmployee("test", "test"));
 
         Employee expected = new Employee(name, surname, departament, salary);
         assertThat(employeeService.addEmployee(name, surname, departament, salary)).isEqualTo(expected);
@@ -77,12 +79,13 @@ public class EmployeeServiceTest {
 
 
     }
+
     @ParameterizedTest
     @MethodSource("params")
     public void removePositiveTest(String name,
                                    String surname,
                                    int departament,
-                                   double salary){
+                                   double salary) {
 
         Employee expected = new Employee(name, surname, departament, salary);
         assertThat(employeeService.addEmployee(name, surname, departament, salary)).isEqualTo(expected);
@@ -91,14 +94,15 @@ public class EmployeeServiceTest {
         assertThat(employeeService.getAll()).isEmpty();
 
     }
+
     @ParameterizedTest
     @MethodSource("params")
     public void findNegativeTest(String name,
-                                   String surname,
-                                   int departament,
-                                   double salary){
+                                 String surname,
+                                 int departament,
+                                 double salary) {
         assertThatExceptionOfType(EmployeeNotFoundException.class)
-                .isThrownBy(()->employeeService.findEmployee("test","test"));
+                .isThrownBy(() -> employeeService.findEmployee("test", "test"));
 
         Employee expected = new Employee(name, surname, departament, salary);
         assertThat(employeeService.addEmployee(name, surname, departament, salary)).isEqualTo(expected);
@@ -107,12 +111,13 @@ public class EmployeeServiceTest {
 
 
     }
+
     @ParameterizedTest
     @MethodSource("params")
     public void findPositiveTest(String name,
                                  String surname,
                                  int departament,
-                                 double salary){
+                                 double salary) {
         Employee expected = new Employee(name, surname, departament, salary);
         assertThat(employeeService.addEmployee(name, surname, departament, salary)).isEqualTo(expected);
 
@@ -121,13 +126,6 @@ public class EmployeeServiceTest {
 
 
     }
-
-
-
-
-
-
-
 
 
     private List<Employee> generateEmployees(int saze) {
